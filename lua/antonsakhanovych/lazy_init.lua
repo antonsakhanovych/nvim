@@ -12,7 +12,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    { import = "sakhant.lazy" },
-    { import = "sakhant.lazy.lsp" },
-    change_detection = { notify = false }
+      spec = { import = "antonsakhanovych.lazy" },
+      change_detection = { notify = false }
 })

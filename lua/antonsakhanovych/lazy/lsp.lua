@@ -35,6 +35,7 @@ return {
             "tsserver",
             "yamlls",
             "html",
+            "nim_langserver",
         }
 
         require("mason-lspconfig").setup({
@@ -45,26 +46,13 @@ return {
                         capabilities = capabilities
                     }
                 end,
-                ["lua_ls"] = function()
-                    local lspconfig = require("lspconfig")
-                    lspconfig.lua_ls.setup {
-                        capabilities = capabilities,
-                        settings = {
-                            Lua = {
-                                diagnostics = {
-                                    globals = { "vim", "it", "describe", "before_each", "after_each" },
-                                }
-                            }
-                        }
-                    }
-                end,
             }
         })
         vim.api.nvim_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", { noremap = true, silent = true })
         vim.api.nvim_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true })
         vim.lsp.inlay_hint.enable()
-        local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
+        local cmp_select = { behavior = cmp.SelectBehavior.Select }
         cmp.setup({
             snippet = {
                 expand = function(args)
@@ -86,7 +74,6 @@ return {
         })
 
         vim.diagnostic.config({
-            -- update_in_insert = true,
             float = {
                 focusable = false,
                 style = "minimal",
